@@ -37,14 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'interface',
-    'user',
-    'document',
-    'evaluation',
-    'report',
-    'ml',
-    'integration',
-    'utility'
+    'interface', # user interface
+    'user', # user management
+    'document', # document management
+    'evaluation', # evaluation logic
+    'report', # report generation
+    'ml', # machine learning
+    'integration', # integration with other micro systems
+    'utility', # utility functions
+    'tailwind', # tailwind css
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Tailwind app
+TAILWIND_APP_NAME = 'interface'
+
+# Tailwind css file
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'
