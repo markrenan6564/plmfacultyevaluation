@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'interface', # user interface
     'user', # user management
     'document', # document management
@@ -45,7 +46,11 @@ INSTALLED_APPS = [
     'ml', # machine learning
     'integration', # integration with other micro systems
     'utility', # utility functions
+    
     'tailwind', # tailwind css
+    'theme', # tailwind theme
+    
+    'django_browser_reload', # browser reload
 ]
 
 MIDDLEWARE = [
@@ -56,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware', # browser reload
 ]
 
 ROOT_URLCONF = 'plmfacultyevaluation.urls'
@@ -132,11 +138,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Tailwind app
-TAILWIND_APP_NAME = 'interface'
+TAILWIND_APP_NAME = 'theme'
 
 # Tailwind css file
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-
-NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'
