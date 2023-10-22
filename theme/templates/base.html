@@ -3,16 +3,26 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <title>Django Tailwind</title>
+    <title>{% block title %}{% endblock %} | EduRate</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% tailwind_css %}
 	</head>
 
-	<body class="bg-black font-serif leading-normal tracking-normal">
-		<div class="container mx-auto">
-			<h1 class="text-white">Hello</h1>
-		</div>
+	<body class= "font-sans leading-normal tracking-normal text-base">
+		<!-- <header class="bg-oxford-blue flex h-20 justify-between fixed top-0 right-0 left-0">
+			<div class="flex items-center">
+				<img src="{% static 'images/plmSeal.png' %}" alt="PLM University Seal" class="p-2 py-1 text-8xl max-h-full max-w-full">
+				<h1 class="text-white font-sans font-bold">PAMANTASAN NG LUNGSOD NG MAYNILA</h1>
+			</div>
+			<div class="flex items-center text-center">
+				<a href="#" class="p-5 py-5 text-white font-extrabold">Home</a>
+				<a href="#" class="p-5 py-5 text-white font-extrabold">About</a>
+				<a href="#" class="p-5 py-5 text-white font-extrabold">Profile</a>
+			</div>
+		</header> -->
+		{% block content %}
+		{% endblock %}
 	</body>
 </html>

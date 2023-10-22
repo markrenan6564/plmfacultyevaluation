@@ -1,1 +1,39 @@
 {% extends "base.html" %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <div class="grid grid-cols-1 md:grid-cols-2">
+        <section>
+            <!--Logo and Website Name-->
+            <div>
+                <img src="{% static 'images/edurateLogo.png' %}" alt="Edurate Logo" class="sm:w-4/12 w-6/12 sm:mt-28 mx-auto">
+            </div>
+            <div class="sm:text-3xl text-8xl/[100px] text-center font-sans font-semibold">
+                EduRate | An AI-Powered Evaluation System
+            </div>
+            <!--Login Form-->
+            <form method="post" class="text-center">
+                <div class="flex flex-col text-center justify-center w-6/12 mx-auto">
+                    {% csrf_token %}
+                    <div class="mt-10 text-center">
+                        <input type="text" name="username" id="username" placeholder="Username" class="border-2/[1px] border-gray-200 text-black sm:w-full w-8/12">
+                    </div>
+                    <div class="mt-3 text-center">
+                        <input type="password" name="password" id="password" placeholder="Password" class="border-2/[1px] border-gray-200 sm:w-full w-8/12 mx-auto">
+                    </div>
+                    <div class="mt-3 text-center">
+                        <a href="#" class="sm:text-sm underline hover:text-blue-800">Forgot Password?</a>
+                    </div>
+                    <button class="sm:w-full w-8/12 bg-oxford-blue sm:py-2 py-3 mt-4 text-white hover:bg-indigo-950 items-center mx-auto">
+                        Login
+                    </button>
+                    <h1 class="sm:text-sm text-xs mt-4">Don't have an account yet? <a href="{% url 'interface:signup' %}" class="underline hover:text-blue-800">Sign Up</a></h1>
+                </div>
+            </form>
+        </section>
+        <!--Preview Image-->
+        <section class= "bg-alice-blue h-screen">
+            <img src="{% static 'images/evaluatePreview.png' %}" alt="Evaluation Preview" class="h-3/4 w-10/12 mt-28 items-center mx-auto">
+        </section>
+    </div>
+{% endblock %}

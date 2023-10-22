@@ -42,7 +42,12 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                'oxford-blue' : '#031D44',
+                'alice-blue' : '#E6F2FF',
+            },
+        },
     },
     plugins: [
         /**
