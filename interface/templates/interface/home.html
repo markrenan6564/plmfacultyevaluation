@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Login{% endblock %}
 {% block content %}
+<body>
     <div class="grid grid-cols-1 md:grid-cols-2">
         <section>
             <!--Logo and Website Name-->
@@ -28,6 +29,7 @@
                         Login
                     </button>
                     <h1 class="sm:text-sm text-xs mt-4">Don't have an account yet? <a href="{% url 'interface:signup' %}" class="underline hover:text-blue-800">Sign Up</a></h1>
+                    <a href="{% url 'interface:dashboard' %}" class="underline hover:text-blue-800">Dashboard</a></h1>
                 </div>
             </form>
         </section>
@@ -36,4 +38,5 @@
             <img src="{% static 'images/evaluatePreview.png' %}" alt="Evaluation Preview" class="h-3/4 w-10/12 mt-28 items-center mx-auto">
         </section>
     </div>
+</body>
 {% endblock %}

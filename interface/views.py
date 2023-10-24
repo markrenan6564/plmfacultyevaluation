@@ -6,3 +6,6 @@ def homepage(request):
 
 def signup(request):
 	return render(request, template_name="interface/signup.html")
+
+def dashboard(request):
+	return render(request, template_name="interface/dashboard.html")

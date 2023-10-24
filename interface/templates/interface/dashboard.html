@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<body class="p-6">
+	<header class='flex top-0 left-0 right-0 fixed justify-between shadow-sm bg-white border-gray-200 font-sans min-h-[50px] border-b-[1px]'>
+		<!--Header PFP and Intro-->
+		<div class='flex items-center justify-between font-semiboldtext-lg'>
+		<a href="{% url 'interface:dashboard' %}"><img src="{% static 'images/edurateLogo.png' %}" class="w-16"></a>
+		<h1>Dashboard</h1>
+		</div>
+		<!--User Profile-->
+		<div class="flex gap-x-2 items-center mr-8 text-lg">
+		<img src="{% static 'images/bell.png' %}" alt="Notification bell" class="w-6">
+		<img src="{% static 'images/line.png' %}" alt="Line" class="w-6">
+		<img src="{% static 'images/down.png' %}" alt="Down arrow" class="w-6">
+		denzelclyde
+		<img src="{% static 'images/placeholderProfile.jpg' %}" class="w-16">
+		</div>
+	</header>
+	<!--Evaluate Button-->
+	<div class="flex w-full min-h-[450px] gap-5 mt-20">
+		<div class="w-2/4 h-[450px] ml-5 bg-cover bg-no-repeat border-2 border-oxford-blue rounded-xl" style="background-image: url('{% static "images/officeEvaluate.jpg" %}');">
+			<a href="#" class="relative text-lg top-5 left-2 mt-3 ml-3 p-2 bg-white border border-oxford-blue rounded-lg hover:bg-oxford-blue hover:text-white hover:border-transparent" style="pointer-events: auto;">Evaluate</a>
+			<div class="absolute top-5 left-5 w-2/4 h-[450px] rounded-lg bg-black opacity-0 transition-opacity duration-300 hover:opacity-60 flex flex-col justify-center items-center" style="pointer-events: none;">
+				<p class="text-white text-lg">Evaluate your documents automatically for an efficient scoring of documents.</p>
+			</div>
+		</div>
+		<!--Total Points-->
+		<div class="flex w-[46%] border-2 border-oxford-blue rounded-lg p-7">
+			<div class="grid grid-cols-2 gap-x-4" style="grid-template-columns: 3fr 2fr;">
+				<div class="font-bold text-4xl h-16 flex items-center">
+					Total Points
+				</div>
+				<div class="font-bold text-4xl h-16 flex items-center justify-end">
+					200/200
+				</div>
+				<div class="h-12 text-2xl flex items-center">
+					Educational Qualifications
+				</div>
+				<div class="h-12 text-2xl flex justify-end items-center">
+					85/85
+				</div>
+				<div class="h-12 text-2xl flex items-center">
+					Experience and Professional Services
+				</div>
+				<div class="h-12 text-2xl flex justify-end items-center">
+					25/25
+				</div>
+				<div class="h-12 text-2xl flex items-center">
+					Professional Development
+				</div>
+				<div class="h-12 text-2xl flex justify-end items-center">
+					90/90
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Left Side Employment Status & Qualifications-->
+	<div class="flex min-h-[400px] ml-5 w-full gap-5 mt-5">
+		<!--Employment Status-->
+		<div class="flex-col w-2/4">
+			<div class="grid grid-cols-2 min-h-[150px] p-4 w-full items-center justify-between border-oxford-blue rounded-lg border-2" style="grid-template-columns: 3fr 2fr;">
+				<h1 class="font-bold text-3xl">Employment Status</h1>
+				<h1 class="text-3xl">Regular</h1>
+			</div>
+			<!--Qualification for Promotion-->
+			<div class="min-h-[230px] mt-5 p-4 w-full grid grid-cols-2 items-center justify-between border-oxford-blue rounded-lg border-2" style="grid-template-columns: 3fr 2fr;">
+				<h1 class="font-bold text-3xl">Current Qualifications</h1>
+				<h1 class="text-3xl">Professor I</h1>
+				<h1 class="font-bold text-3xl">Next Qualifications</h1>
+				<h1 class="text-3xl">Professor II</h1>
+			</div>
+		</div>
+		<!--Recommendations-->
+		<div class="flex flex-col min-h-[400px] w-[46%] p-7 border-oxford-blue rounded-lg border-2">
+			<div class="font-bold text-4xl">
+				Recommendations
+			</div>
+			<div class="text-2xl mt-6">
+				Congratulations! You maxed out your points!
+			</div>
+		</div>
+	</div>
+</body>
+
+{% endblock %}

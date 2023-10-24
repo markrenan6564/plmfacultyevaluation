@@ -46,6 +46,7 @@ module.exports = {
             colors: {
                 'oxford-blue' : '#031D44',
                 'alice-blue' : '#E6F2FF',
+                'prussian-blue' : '#18314F',
             },
         },
     },
