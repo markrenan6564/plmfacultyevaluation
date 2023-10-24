@@ -3,21 +3,7 @@
 {% block title %}Dashboard{% endblock %}
 {% block content %}
 <body class="p-6">
-	<header class='flex top-0 left-0 right-0 fixed justify-between shadow-sm bg-white border-gray-200 font-sans min-h-[50px] border-b-[1px]'>
-		<!--Header PFP and Intro-->
-		<div class='flex items-center justify-between font-semiboldtext-lg'>
-		<a href="{% url 'interface:dashboard' %}"><img src="{% static 'images/edurateLogo.png' %}" class="w-16"></a>
-		<h1>Dashboard</h1>
-		</div>
-		<!--User Profile-->
-		<div class="flex gap-x-2 items-center mr-8 text-lg">
-		<img src="{% static 'images/bell.png' %}" alt="Notification bell" class="w-6">
-		<img src="{% static 'images/line.png' %}" alt="Line" class="w-6">
-		<img src="{% static 'images/down.png' %}" alt="Down arrow" class="w-6">
-		denzelclyde
-		<img src="{% static 'images/placeholderProfile.jpg' %}" class="w-16">
-		</div>
-	</header>
+
 	<!--Evaluate Button-->
 	<div class="flex w-full min-h-[450px] gap-5 mt-20">
 		<div class="w-2/4 h-[450px] ml-5 bg-cover bg-no-repeat border-2 border-oxford-blue rounded-xl" style="background-image: url('{% static "images/officeEvaluate.jpg" %}');">
