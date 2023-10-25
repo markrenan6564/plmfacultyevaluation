@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Evaluate{% endblock %}
+{% block content %}
+<body class="mt-14 p-2">
+    <div>
+        <div class="p-6 flex w-full">
+            <h1 class="text-5xl font-bold">Evaluate</h1>
+        </div>
+        <div class="px-60 py-14 flex flex-col gap-y-6 w-full">
+            <!--Add Automatic and Manual-->
+            <div class="flex justify-end items-center gap-x-5">
+                <h1 class="text-base font-bold">Add</h1>
+                <label for="uploadFile1" class="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2.5 outline-none rounded w-max cursor-pointer font-[sans-serif]">
+                    <img src="{% static 'images/camera.png' %}" alt="Camera Icon" class="w-5 h-5 inline-block mr-2" />
+                    Automatically
+                    <input type="file" id='uploadFile1' class="hidden" />
+                </label>
+                <label for="uploadFile1" class="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2.5 outline-none rounded w-max cursor-pointer font-[sans-serif]">
+                    <img src="{% static 'images/edit.png' %}" alt="Edit Icon" class="w-5 h-5 inline-block mr-2" />
+                    Manually
+                    <input type="file" id='uploadFile1' class="hidden" />
+                </label>
+            </div>
+             <!--Academic, Professional Services-->
+             <div class="flex justify-between">
+                <h3 class="text-2xl font-bold">Academic</h3>
+                <h3 class="text-2xl font-bold">0/90</h3>
+             </div>
+             <div class="flex-col flex p-6 gap-y-3 rounded-2xl bg-melon justify-between">
+                <div class="flex justify-between">
+                    <h4 class="font-bold">Diploma</h4>
+                    <h4 class="font-bold">35 points</h4>
+                </div>
+                <div class="flex">Bachelor of Science in Information Technology</div>
+                <div class="flex">University of the Philippines</div>
+                <div class="flex gap-x-3 justify-end">
+                    <label for="uploadFile1" class="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2.5 outline-none w-max cursor-pointer font-[sans-serif]">
+                        Edit
+                        <input type="file" id='uploadFile1' class="hidden" />
+                    </label>
+                    <label for="uploadFile1" class="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2.5 outline-none w-max cursor-pointer font-[sans-serif]">
+                        Delete
+                        <input type="file" id='uploadFile1' class="hidden" />
+                    </label>
+                </div>
+             </div>
+             <div class="flex justify-between">
+                <h3 class="text-2xl font-bold">Professional Services</h3>
+                <h3 class="text-2xl font-bold">0/25</h3>
+             </div>
+             <div class="flex-col flex p-6 gap-y-3 rounded-2xl bg-melon justify-between">
+                <div class="flex justify-between">
+                    <h4 class="font-bold">Certificate of Recognition</h4>
+                    <h4 class="font-bold">35 points</h4>
+                </div>
+                <div class="flex">International Award</div>
+                <div class="flex">Author</div>
+                <div class="flex gap-x-3 justify-end">
+                    <label for="uploadFile1" class="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2.5 outline-none w-max cursor-pointer font-[sans-serif]">
+                        Edit
+                        <input type="file" id='uploadFile1' class="hidden" />
+                    </label>
+                    <label for="uploadFile1" class="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2.5 outline-none w-max cursor-pointer font-[sans-serif]">
+                        Delete
+                        <input type="file" id='uploadFile1' class="hidden" />
+                    </label>
+                </div>
+             </div>
+             <div class="flex justify-between">
+                <h3 class="text-2xl font-bold">Academic</h3>
+                <h3 class="text-2xl font-bold">0/90</h3>
+             </div>
+             <div class="flex-col flex p-6 gap-y-3 rounded-2xl bg-melon justify-between">
+                <div class="flex justify-between">
+                    <h4 class="font-bold">Webinar</h4>
+                    <h4 class="font-bold">35 points</h4>
+                </div>
+                <div class="flex">Unlocking the Potential of AI: From Algorithms to Real-World Applications</div>
+                <div class="flex">Participant</div>
+                <div class="flex gap-x-3 justify-end">
+                    <label for="uploadFile1" class="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2.5 outline-none w-max cursor-pointer font-[sans-serif]">
+                        Edit
+                        <input type="file" id='uploadFile1' class="hidden" />
+                    </label>
+                    <label for="uploadFile1" class="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2.5 outline-none w-max cursor-pointer font-[sans-serif]">
+                        Delete
+                        <input type="file" id='uploadFile1' class="hidden" />
+                    </label>
+                </div>
+             </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

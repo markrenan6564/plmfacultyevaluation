@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<body class=" mt-14 p-2">
+    <div>
+        <div class="p-6 flex justify-center w-full">
+            <h1 class="text-2xl font-bold">Profile Settings</h1>
+        </div>
+        <div class="flex-cols w-full justify-center mx-auto gap-y-4">
+            <img src="{% static 'images/placeholderProfile.jpg' %}" class="w-40 h-40 rounded-full mx-auto">
+            <label for="uploadFile1" class="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2.5 outline-none rounded w-max cursor-pointer mx-auto block font-[sans-serif]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 mr-2 fill-white inline" viewBox="0 0 32 32">
+            <path
+                d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+                data-original="#000000" />
+            <path
+                d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+                data-original="#000000" />
+            </svg>
+            Change Picture
+            <input type="file" id='uploadFile1' class="hidden" />
+        </label>
+        </div>
+    </div>
+    <div class="max-w-4xl mx-auto font-[sans-serif] text-[#333] p-6">
+        <form>
+          <div class="grid sm:grid-cols-2 gap-y-7 gap-x-12">
+            <div>
+              <label class="text-sm mb-2 block">First Name</label>
+              <input name="name" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-500" placeholder="Enter name" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Last Name</label>
+              <input name="lname" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-500" placeholder="Enter last name" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Email</label>
+              <input name="email" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-500" placeholder="Enter email" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Password</label>
+              <input name="number" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-500" placeholder="Enter password" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Faculty Number</label>
+              <input name="password" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-500" placeholder="Enter password" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Type of Applicant</label>
+              <input name="cpassword" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-500" placeholder="Type of Applicant" />
+            </div>
+          </div>
+          <div class="!mt-10">
+            <button type="button" class="min-w-[150px] py-3 px-4 text-sm font-semibold rounded text-white bg-blue-500 hover:bg-blue-600 focus:outline-none">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+</body>
+{% endblock %}

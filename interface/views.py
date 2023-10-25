@@ -15,4 +15,5 @@ def dashboard(request):
 def profile(request):
 	return render(request, template_name="interface/profile.html", context={"excluded_urls": excluded_urls})
 
-
+def evaluate(request):
+	return render(request, template_name="interface/evaluate.html", context={"excluded_urls": excluded_urls})
