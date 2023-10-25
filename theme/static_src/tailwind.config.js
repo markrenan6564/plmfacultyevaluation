@@ -65,7 +65,8 @@ module.exports = {
         require("daisyui"),
     ],
     daisyui: {
-        themes: ['business'],
+        styeled: true,
+        themes: true,
         rtl: false,
     },
 }

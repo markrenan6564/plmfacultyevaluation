@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Signup{% endblock %}
+{% block navbar %}{% endblock navbar %}
 {% block content %}
-<body class="bg-cover bg-no-repeat" style="background-image: url('{% static "images/plmBg.jpg" %}'); background-size:105%; background-attachment: fixed;"">
-  <div class="flex w-full align-middle justify-end">
+  <div  class="bg-cover bg-no-repeat flex w-full align-middle justify-end" style="background-image: url('{% static "images/plmBg.jpg" %}'); background-size:105%; background-attachment: fixed;">
     <div class="bg-white font-sans bg-opacity-70 p-8 mt-10 mr-8 max-w-md w-full rounded-lg">
         <h1 class="text-2xl font-semibold text-center mb-8">Sign up for EduRate.</h1>
         <form>
@@ -40,6 +40,4 @@
         <p class="text-center mt-4">Already have an account? <a href="{% url 'interface:homepage' %}" class="text-blue-600">Login</a></p>
     </div>
   </div>
-</body>
-
 {% endblock %}
