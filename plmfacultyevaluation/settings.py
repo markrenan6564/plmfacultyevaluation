@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api.apps.ApiConfig', # api app
-    'rest_framework' , # rest framework 
     
     'interface', # user interface
     'account', # account management
