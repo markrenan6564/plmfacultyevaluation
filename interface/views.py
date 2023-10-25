@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-excluded_urls = ['home.html', 'signup.html']
+excluded_urls = ['homepage', 'signup']
 
 # Create your views here.
 def homepage(request):

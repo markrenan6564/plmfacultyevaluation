@@ -48,6 +48,7 @@ module.exports = {
                 'alice-blue' : '#E6F2FF',
                 'prussian-blue' : '#18314F',
                 'melon' : '#E9AFA3',
+                'beige': '#E2E8CE',
             },
         },
     },
