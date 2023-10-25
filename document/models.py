@@ -127,6 +127,7 @@ class DocSubCriteria(models.Model):
     def __str__(self):
         return self.docsubcriteria_name
 
+
 class Document(models.Model):
     """
     A model representing a document.
@@ -149,13 +150,13 @@ class Document(models.Model):
         is_active (bool): A flag indicating whether the document is active or not.
     """
     document_id = models.AutoField(primary_key=True)
-    docmajor_id = models.ForeignKey('DocMajorComponent', on_delete=models.CASCADE)
-    docsubmajor_id = models.ForeignKey('DocSubMajorComponent', on_delete=models.CASCADE, null=True)
-    docsubminor_id = models.ForeignKey('DocSubMinorComponent', on_delete=models.CASCADE, null=True)
-    docminor_id = models.ForeignKey('DocMinorComponent', on_delete=models.CASCADE, null=True)
-    doccategory_id = models.ForeignKey('DocCategory', on_delete=models.CASCADE, null=True)
-    doccriteria_id = models.ForeignKey('DocCriteria', on_delete=models.CASCADE, null=True)
-    docsubcriteria_id = models.ForeignKey('DocSubCriteria', on_delete=models.CASCADE, null=True)
+    docmajor = models.ForeignKey('DocMajorComponent', on_delete=models.CASCADE)
+    docsubmajor = models.ForeignKey('DocSubMajorComponent', on_delete=models.CASCADE, null=True, blank=True)
+    docsubminor = models.ForeignKey('DocSubMinorComponent', on_delete=models.CASCADE, null=True, blank=True)
+    docminor = models.ForeignKey('DocMinorComponent', on_delete=models.CASCADE, null=True, blank=True)
+    doccategory = models.ForeignKey('DocCategory', on_delete=models.CASCADE, null=True, blank=True)
+    doccriteria = models.ForeignKey('DocCriteria', on_delete=models.CASCADE, null=True, blank=True)
+    docsubcriteria = models.ForeignKey('DocSubCriteria', on_delete=models.CASCADE, null=True,blank=True)
     document_name = models.CharField(max_length=255)
     document_description = models.TextField(null=True, blank=True)
     points = models.FloatField()
@@ -165,5 +166,8 @@ class Document(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
+        """
+        Returns the name of the document.
+        """
         return self.document_name
 

@@ -1,5 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.utils import timezone
+
+from .managers import AccountManager
+
+from django.conf import settings
+from django.contrib.auth import get_user_model
 
 class Department(models.Model):
     """
@@ -8,11 +14,13 @@ class Department(models.Model):
     Attributes:
         department_id (int): The unique identifier of the department.
         department_name (str): The name of the department.
+        department_abbreviation (str): The abbreviation of the department.
         department_description (str): A brief description of the department.
         is_active (bool): A flag indicating whether the department is active or not.
     """
     department_id = models.AutoField(primary_key=True)
     department_name = models.CharField(max_length=100)
+    department_abbreviation = models.CharField(max_length=100)
     department_description = models.TextField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
@@ -26,43 +34,18 @@ class College(models.Model):
     Attributes:
         college_id (int): The primary key of the college.
         college_name (str): The name of the college.
+        college_abbreviation (str): The abbreviation of the college.
         college_description (str): The description of the college.
         is_active (bool): A flag indicating whether the college is active or not.
     """
     college_id = models.AutoField(primary_key=True)
     college_name = models.CharField(max_length=100)
+    college_abbreviation = models.CharField(max_length=100)
     college_description = models.TextField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.college_name
-
-class CustomUser(AbstractUser):
-    """
-    A model representing a custom user.
-
-    Attributes:
-        department_id (int): The foreign key referencing the Department model.
-        college_id (int): The foreign key referencing the College model.
-        middle_name (str): The middle name of the user.
-        faculty_id (str): The faculty ID of the user.
-        birthdate (date): The birthdate of the user.
-        plm_email (str): The PLM email of the user.
-        contact_no (str): The contact number of the user.
-        address (str): The address of the user.
-    """
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True, blank=True)
-    college = models.ForeignKey(College, on_delete=models.CASCADE, null=True, blank=True)
-    middle_name = models.CharField(max_length=30, null=True, blank=True)
-    faculty_id = models.CharField(max_length=20, null=True, blank=True)
-    date_of_birth = models.DateField(null=True, blank=True)
-    plm_email = models.EmailField(max_length=254, null=True, blank=True)
-    contact_no = models.CharField(max_length=20, null=True, blank=True)
-    address = models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return f'{self.email}:{self.first_name} {self.last_name}'
-
 
 class CollegeReviewRankingCommitteeRole(models.Model):
     """
@@ -88,8 +71,8 @@ class CollegeReviewRankingCommittee(models.Model):
 
     Attributes:
         crrc_id (int): The unique identifier of the committee.
-        user_id (int): The foreign key referencing the CustomUser model.
-        role_id (int): The foreign key referencing the CollegeReviewRankingCommitteeRole model.
+        account (int): The foreign key referencing the CustomUser model.
+        role (int): The foreign key referencing the CollegeReviewRankingCommitteeRole model.
         department_id (int): The foreign key referencing the Department model.
         college_id (int): The foreign key referencing the College model.
         date_modified (datetime): The date when the committee was last modified.
@@ -97,10 +80,10 @@ class CollegeReviewRankingCommittee(models.Model):
         is_active (bool): A flag indicating whether the committee is active or not.
     """
     crrc_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    role_id = models.ForeignKey(CollegeReviewRankingCommitteeRole, on_delete=models.CASCADE)
-    department_id = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
-    college_id = models.ForeignKey(College, on_delete=models.CASCADE)
+    account = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    role = models.ForeignKey(CollegeReviewRankingCommitteeRole, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
+    college = models.ForeignKey(College, on_delete=models.CASCADE)
     date_modified = models.DateTimeField(auto_now=True)
     has_credentials = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -171,18 +154,18 @@ class FacultyRank(models.Model):
 
     Attributes:
         facultyrank_id (int): The unique identifier of the faculty rank.
-        rank_id (int): The foreign key referencing the Rank model.
-        subrank_id (int): The foreign key referencing the SubRank model.
-        salarygrade_id (int): The foreign key referencing the SalaryGrade model.
+        rank (int): The foreign key referencing the Rank model.
+        subrank (int): The foreign key referencing the SubRank model.
+        salarygrade (int): The foreign key referencing the SalaryGrade model.
         facultyrank_description (str): A brief description of the faculty rank.
         minpoints (int): The minimum points required for the faculty rank.
         maxpoints (int): The maximum points required for the faculty rank.
         is_active (bool): A flag indicating whether the faculty rank is active or not.
     """
     facultyrank_id = models.AutoField(primary_key=True)
-    rank_id = models.ForeignKey(Rank, on_delete=models.CASCADE)
-    subrank_id = models.ForeignKey(SubRank, on_delete=models.CASCADE, null=True)
-    salarygrade_id = models.ForeignKey(SalaryGrade, on_delete=models.CASCADE)
+    rank = models.ForeignKey(Rank, on_delete=models.CASCADE)
+    subrank = models.ForeignKey(SubRank, on_delete=models.CASCADE, null=True)
+    salarygrade = models.ForeignKey(SalaryGrade, on_delete=models.CASCADE)
     facultyrank_description = models.TextField(null=True, blank=True)
     minpoints = models.IntegerField()
     maxpoints = models.IntegerField()
@@ -226,4 +209,131 @@ class HiringNature(models.Model):
 
     def __str__(self):
         return self.hiringnature_name
+
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.utils import timezone
+
+class AccountManager(BaseUserManager):
+    def create_user(self, email, password=None, **kwargs):
+        if not email:
+            raise ValueError('Users must have a valid email address.')
+        account = self.model(
+            email=self.normalize_email(email),
+            **kwargs
+        )
+        account.set_password(password)
+        account.save()
+        return account
+
+    def create_superuser(self, email, password, **kwargs):
+        account = self.create_user(email, password, **kwargs)
+        account.is_staff = True
+        account.is_superuser = True
+        account.save()
+        return account
+
+class FacultyRankHistory(models.Model):
+    """
+    Model representing the history of faculty rank changes.
+
+    Fields:
+    - accountrankhistory_id: AutoField, primary key
+    - user: ForeignKey to AUTH_USER_MODEL, on_delete CASCADE
+    - currentrank: ForeignKey to FacultyRank, related name 'current_rank', on_delete CASCADE
+    - currentnature: ForeignKey to HiringNature, related name 'current_nature', on_delete CASCADE
+    - currentstatus: ForeignKey to EmploymentStatus, related name 'current_status', on_delete CASCADE
+    - targetrank: ForeignKey to FacultyRank, related name 'target_rank', on_delete CASCADE
+    - targetnature: ForeignKey to HiringNature, related name 'target_nature', on_delete CASCADE
+    - targetstatus: ForeignKey to EmploymentStatus, related name 'target_status', on_delete CASCADE
+    - date_of_request: DateTimeField, default timezone.now
+    - is_successful: BooleanField, default False
+    - date_of_promotion: DateTimeField, blank and null allowed
+    - is_active: BooleanField, default True
+    """
+    accountrankhistory_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    
+    currentrank = models.ForeignKey(FacultyRank, on_delete=models.CASCADE, related_name='current_rank')
+    currentnature = models.ForeignKey(HiringNature, on_delete=models.CASCADE, related_name='current_nature')
+    currentstatus = models.ForeignKey(EmploymentStatus, on_delete=models.CASCADE, related_name='current_status')
+    
+    targetrank = models.ForeignKey(FacultyRank, on_delete=models.CASCADE, related_name='target_rank')
+    targetnature = models.ForeignKey(HiringNature, on_delete=models.CASCADE, related_name='target_nature')
+    targetstatus = models.ForeignKey(EmploymentStatus, on_delete=models.CASCADE, related_name='target_status')
+    
+    date_of_request = models.DateTimeField(default=timezone.now)
+    is_successful = models.BooleanField(default=False)
+    date_of_promotion = models.DateTimeField(blank=True, null=True)
+    
+    is_active = models.BooleanField(default=True)
+
+
+class Account(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom user model for PLM Faculty Evaluation app.
+
+    Fields:
+    - email: EmailField, max_length=100, unique=True
+    - first_name: CharField, max_length=100, default=''
+    - middle_name: CharField, max_length=100, blank=True, default=''
+    - last_name: CharField, max_length=100, default=''
+    - faculty_id: CharField, max_length=100, blank=True, default=''
+    - plm_email: EmailField, max_length=100, blank=True, default=''
+    - college: ForeignKey to College model, on_delete=models.CASCADE, null=True
+    - department: ForeignKey to Department model, on_delete=models.CASCADE, null=True
+    - date_of_birth: DateField, null=True, blank=True
+    - contact_number: CharField, max_length=100, blank=True, default=''
+    - address: TextField, blank=True, default=''
+    - date_added: DateTimeField, default=timezone.now
+    - is_staff: BooleanField, default=False
+    - is_active: BooleanField, default=True
+
+    Methods:
+    - __str__: Returns the full name of the user.
+    - get_full_name: Returns the full name and email of the user.
+    - get_short_name: Returns the first name of the user.
+    """
+    
+    email = models.EmailField(max_length=100, unique=True)
+    
+    first_name = models.CharField(max_length=100, default='')
+    middle_name = models.CharField(max_length=100, blank=True, default='')
+    last_name = models.CharField(max_length=100, default='')
+    
+    faculty_id = models.CharField(max_length=100, blank=True, default='')
+    plm_email = models.EmailField(max_length=100, blank=True, default='')
+    college = models.ForeignKey(College, on_delete=models.CASCADE, null=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
+    
+    date_of_birth = models.DateField(null=True, blank=True)
+    contact_number = models.CharField(max_length=100, blank=True, default='')
+    address = models.TextField(blank=True, default='')
+    
+    currentrank = models.ForeignKey(FacultyRankHistory, on_delete=models.CASCADE, related_name='current_rank', blank=True, null=True)
+    
+    date_added = models.DateTimeField(default=timezone.now)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    
+    objects = AccountManager()
+    
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+    
+    def __str__(self) -> str:   
+        return f'{self.first_name} {self.last_name}'
+    
+    def get_full_name(self):
+        """
+        Returns the full name and email of the user.
+        """
+        return f'{self.email}: {self.first_name} {self.last_name}'
+    
+    def get_short_name(self):
+        """
+        Returns the first name of the user.
+        """
+        return self.first_name
+    
 

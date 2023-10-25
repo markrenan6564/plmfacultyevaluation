@@ -160,4 +160,6 @@ INTERNAL_IPS = [
 ]
 
 # For creating custom user model
-AUTH_USER_MODEL = 'account.CustomUser'
+AUTH_USER_MODEL = 'account.Account'
+
+# NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'
