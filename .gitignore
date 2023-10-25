@@ -91,5 +91,7 @@ local_settings.py
 .env
 db.sqlite3
 
+migrations/
+
 # Remove Visual Stuido Code workspace file
 Capstone.code-workspace

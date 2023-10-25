@@ -39,10 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api.apps.ApiConfig', # api app
-    'rest_framework' , # rest framework 
     
     'interface', # user interface
-    'user', # user management
+    'account', # account management
     'document', # document management
     'evaluation', # evaluation logic
     'report', # report generation
@@ -52,6 +51,9 @@ INSTALLED_APPS = [
     
     'tailwind', # tailwind css
     'theme', # tailwind theme
+    
+    'rest_framework', # rest api
+    'corsheaders', # cross origin resource sharing
     
     'django_browser_reload', # browser reload
 ]
@@ -65,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware', # browser reload
+    
+    'corsheaders.middleware.CorsMiddleware',    # cross origin resource sharing
 ]
 
 ROOT_URLCONF = 'plmfacultyevaluation.urls'
@@ -93,11 +97,14 @@ WSGI_APPLICATION = 'plmfacultyevaluation.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'plmfacultyevaluation',
+        'USER': 'postgres',
+        'PASSWORD': '042801',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -123,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Manila'
 
 USE_I18N = True
 
@@ -151,3 +158,6 @@ TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# For creating custom user model
+AUTH_USER_MODEL = 'account.CustomUser'
