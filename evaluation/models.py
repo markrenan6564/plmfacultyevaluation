@@ -24,4 +24,4 @@ class Evaluation(models.Model):
     is_active = models.BooleanField(default=True)
     
     def __str__(self):
-        return self.document.title + " - " + self.evaluator.email
+        return self.document.document_name + " : " + self.account.email

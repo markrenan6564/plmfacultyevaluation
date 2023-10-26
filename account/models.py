@@ -254,13 +254,13 @@ class FacultyRankHistory(models.Model):
     accountrankhistory_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
-    currentrank = models.ForeignKey(FacultyRank, on_delete=models.CASCADE, related_name='current_rank')
-    currentnature = models.ForeignKey(HiringNature, on_delete=models.CASCADE, related_name='current_nature')
-    currentstatus = models.ForeignKey(EmploymentStatus, on_delete=models.CASCADE, related_name='current_status')
+    currentrank = models.ForeignKey(FacultyRank, on_delete=models.CASCADE, related_name='current_rank', blank=True, null=True)
+    currentnature = models.ForeignKey(HiringNature, on_delete=models.CASCADE, related_name='current_nature', blank=True, null=True)
+    currentstatus = models.ForeignKey(EmploymentStatus, on_delete=models.CASCADE, related_name='current_status', blank=True, null=True)
     
-    targetrank = models.ForeignKey(FacultyRank, on_delete=models.CASCADE, related_name='target_rank')
-    targetnature = models.ForeignKey(HiringNature, on_delete=models.CASCADE, related_name='target_nature')
-    targetstatus = models.ForeignKey(EmploymentStatus, on_delete=models.CASCADE, related_name='target_status')
+    targetrank = models.ForeignKey(FacultyRank, on_delete=models.CASCADE, related_name='target_rank', blank=True, null=True)
+    targetnature = models.ForeignKey(HiringNature, on_delete=models.CASCADE, related_name='target_nature', blank=True, null=True)
+    targetstatus = models.ForeignKey(EmploymentStatus, on_delete=models.CASCADE, related_name='target_status', blank=True, null=True)
     
     date_of_request = models.DateTimeField(default=timezone.now)
     is_successful = models.BooleanField(default=False)

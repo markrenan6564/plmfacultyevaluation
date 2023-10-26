@@ -10,8 +10,16 @@
     <div class="flex gap-x-2 items-center mr-8 text-lg">
     <img src="{% static 'images/bell.png' %}" alt="Notification bell" class="w-6">
     <img src="{% static 'images/line.png' %}" alt="Line" class="w-6">
-    <img src="{% static 'images/down.png' %}" alt="Down arrow" class="w-6">
-    denzelclyde
+    <div class="dropdown dropdown-hover">
+        <label tabindex="0" class="btn m-1">            
+            <img src="{% static 'images/down.png' %}" alt="Down arrow" tabindex="0" class=" w-6">
+        </label>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Profile</a></li>
+          <li><a href="{% url 'interface:logout' %}">Log out</a></li>
+        </ul>
+      </div>
+    {{ user.first_name}}
     <img src="{% static 'images/placeholderProfile.jpg' %}" class="w-16">
     </div>
 </header>

@@ -3,6 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from account.forms import AccountLoginForm
 
+from account.models import *
+from evaluation.models import *
+
 # Create your views here.
 def homepage(request):
 	if request.user.is_authenticated:
@@ -16,8 +19,11 @@ def homepage(request):
 					login(request, user)
 					return render(request = request, template_name="interface/dashboard.html")
 				else:
-					messages.success(request, 'Invalid username or password.')
+					messages.success(request, 'Invalid email or password.')
 					return render(request, "interface/home.html", {"form": form})
+			else:
+				messages.success(request, 'Invalid username or password.')
+				return render(request, "interface/home.html", {"form": form})
 		else:
 			return render(request, "interface/home.html", {"form": form})
  
@@ -26,10 +32,24 @@ def signup(request):
 	return render(request, template_name="interface/signup.html")
 
 def dashboard(request):
-	return render(request, template_name="interface/dashboard.html")
+	user = get_user_model().objects.get(email=request.user.email)
+	return render(request, "interface/dashboard.html", {'user': user})
+
+def logout_view(request):
+	logout(request)
+	messages.success(request, 'You have been logged out.')
+	return redirect('interface:homepage')
 
 def profile(request):
 	return render(request, template_name="interface/profile.html")
 
 def evaluate(request):
-	return render(request, template_name="interface/evaluate.html")
+	academic = Evaluation.objects.filter(account=request.user)
+	return render(request, "interface/evaluate.html", {'academic': academic})
+
+def manual_add(request):
+	return render(request, template_name="interface/manual_add.html")
+
+def duga(request):
+	return render(request, template_name="interface/duga.html")
+

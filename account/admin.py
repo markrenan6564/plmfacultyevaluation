@@ -1,20 +1,24 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
+
+from django.conf import settings
+from django.contrib.auth import get_user_model
 
 from .models import *
 
-class UserAdminConfig(UserAdmin):
+# class AccountAdminConfig():
     
-    search_fields = ('email', 'first_name', 'last_name')
-    ordering = ('-date_added',)
-    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_active')
+#     models = settings.AUTH_USER_MODEL
     
-    fieldsets = (
-        (None, {'fields': ('email', 'first_name', 'last_name', 'plm_email')}),
-        ('Permissions', {'fields': ('is_staff', 'is_active')}),
-    )
+#     search_fields = ('email', 'first_name', 'last_name')
+#     ordering = ('-date_added',)
+#     list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_active')
     
-admin.site.register(Account, UserAdminConfig)
+#     fieldsets = (
+#         (None, {'fields': ('email', 'first_name', 'last_name', 'plm_email')}),
+#         ('Permissions', {'fields': ('is_staff', 'is_active')}),
+#     )
+    
+admin.site.register(Account)
 
 admin.site.register(Department)
 admin.site.register(College)
@@ -26,4 +30,5 @@ admin.site.register(SalaryGrade)
 admin.site.register(FacultyRank)
 admin.site.register(EmploymentStatus)
 admin.site.register(HiringNature)
+admin.site.register(FacultyRankHistory)
 # END: 6hj8d9f3k4s2
